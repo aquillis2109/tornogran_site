@@ -1,0 +1,25 @@
+{
+  "name": "TORNOGRAN LTDA",
+  "short_name": "TORNOGRAN",
+  "description": "Usinagem pesada, recuperação industrial e fabricação sob demanda para mineração e máquinas pesadas.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#071113",
+  "theme_color": "#071113",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/tornogran-logo.png",
+      "sizes": "120x61",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
