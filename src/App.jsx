@@ -4,6 +4,7 @@ import { RouterProvider, useLocation } from './components/Router.jsx';
 import { applySEO, defaultSeo, seoConfig } from './components/SEO.jsx';
 import { initializeAnalytics, trackPageView } from './lib/analytics.js';
 import { About } from './pages/About.jsx';
+import { Cases } from './pages/Cases.jsx';
 import { Contact } from './pages/Contact.jsx';
 import { Hardox } from './pages/Hardox.jsx';
 import { Home } from './pages/Home.jsx';
@@ -20,6 +21,7 @@ function Routes() {
     '/servicos': <Services />,
     '/hardox': <Hardox />,
     '/contato': <Contact />,
+    '/cases': <Cases />,
   };
 
   const servicePage = seoServicePages[path];

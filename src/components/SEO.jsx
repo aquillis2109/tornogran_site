@@ -46,6 +46,11 @@ export const seoConfig = {
     description:
       'Fale com a TORNOGRAN, solicite orçamento e envie sua demanda de usinagem, recuperação ou manutenção industrial.',
   },
+  '/cases': {
+    title: 'Cases industriais | Portfólio TORNOGRAN',
+    description:
+      'Cases industriais da TORNOGRAN com recuperação, fabricação e soluções técnicas para mineração e máquinas pesadas.',
+  },
 };
 
 export const defaultSeo = {
