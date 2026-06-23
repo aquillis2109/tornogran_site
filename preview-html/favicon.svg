@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="TORNOGRAN">
+  <rect width="64" height="64" rx="14" fill="#071113"/>
+  <path d="M43 14a20 20 0 1 0 0 36L25 32 43 14Z" fill="#f6c400"/>
+  <path d="M27 32 52 18v28L27 32Z" fill="#ffffff"/>
+  <path d="M43 14a20 20 0 0 0-16 8l16 10 9-14a19.8 19.8 0 0 0-9-4Z" fill="#f67010" opacity=".95"/>
+</svg>

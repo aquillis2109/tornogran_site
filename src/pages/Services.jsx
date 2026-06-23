@@ -11,6 +11,14 @@ const serviceImages = {
   'fabricacao-sob-demanda': '/assets/concha-fachada.png',
 };
 
+const serviceDetailLinks = {
+  'usinagem-pesada': '/usinagem-pesada',
+  'recuperacao-de-componentes': '/recuperacao-industrial',
+  'manutencao-industrial': '/manutencao-industrial',
+  soldagem: '/caldeiraria-industrial',
+  'fabricacao-sob-demanda': '/fabricacao-sob-desenho',
+};
+
 export function Services() {
   return (
     <>
@@ -26,13 +34,13 @@ export function Services() {
           {Object.entries(seoServicePages).map(([path, page]) => (
             <Link key={path} path={path} className="seo-link-card">
               <span>{page.eyebrow}</span>
-              <strong>{page.serviceName}</strong>
+              <strong>{page.cardText}</strong>
             </Link>
           ))}
         </div>
         <div className="grid gap-5">
           {services.map(({ slug, title, intro, details, icon: Icon }) => (
-            <article key={slug} id={slug} className="detail-row">
+            <Link key={slug} id={slug} path={serviceDetailLinks[slug]} className="detail-row detail-row-link">
               <div className="detail-icon">
                 <Icon size={30} />
               </div>
@@ -46,7 +54,7 @@ export function Services() {
                 </ul>
               </div>
               <img className="detail-image" src={serviceImages[slug]} alt={title} loading="lazy" decoding="async" />
-            </article>
+            </Link>
           ))}
         </div>
       </Section>

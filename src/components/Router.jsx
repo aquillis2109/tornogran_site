@@ -3,6 +3,11 @@ import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 const RouterContext = createContext({ path: '/', navigate: () => {} });
 
 function getPath() {
+  if (window.location.protocol === 'file:') {
+    const hashPath = window.location.hash.replace(/^#/, '').split('#')[0];
+    return hashPath.startsWith('/') ? hashPath : '/';
+  }
+
   return window.location.pathname === '' ? '/' : window.location.pathname;
 }
 
@@ -37,7 +42,11 @@ export function RouterProvider({ children }) {
       path,
       navigate: (nextPath) => {
         const url = new URL(nextPath, window.location.origin);
-        window.history.pushState({}, '', nextPath);
+        if (window.location.protocol === 'file:') {
+          window.location.hash = url.pathname + url.hash;
+        } else {
+          window.history.pushState({}, '', nextPath);
+        }
         setPath(url.pathname);
         scrollToHash(url.hash);
       },

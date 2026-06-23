@@ -2,14 +2,15 @@ export const seoServicePages = {
   '/usinagem-pesada': {
     slug: 'usinagem-pesada',
     eyebrow: 'Usinagem pesada',
-    h1: 'Usinagem pesada para componentes industriais de grande porte',
+    h1: 'Usinagem pesada industrial',
     metaTitle: 'Usinagem Pesada | TORNOGRAN LTDA',
     metaDescription:
       'Serviços de usinagem pesada para mineração, máquinas pesadas e indústrias. Fabricação, ajustes e recuperação de componentes críticos.',
     serviceName: 'Usinagem pesada',
+    cardText: 'Componentes de grande porte com precisão dimensional.',
     image: '/assets/oficina-cnc-ampla.png',
     intro:
-      'A TORNOGRAN executa usinagem pesada para peças e conjuntos de grande porte, com foco em precisão dimensional, resistência e disponibilidade operacional.',
+      'Peças e conjuntos de grande porte com precisão, resistência e foco em disponibilidade.',
     paragraphs: [
       'O serviço atende demandas de mineração, máquinas pesadas e plantas industriais que dependem de componentes confiáveis para operar sem paradas prolongadas.',
       'A atuação envolve análise técnica, definição de processo, execução com controle dimensional e acabamento adequado à aplicação do componente.',
@@ -41,14 +42,15 @@ export const seoServicePages = {
   '/recuperacao-industrial': {
     slug: 'recuperacao-industrial',
     eyebrow: 'Recuperação industrial',
-    h1: 'Recuperação industrial de componentes para operações críticas',
+    h1: 'Recuperação industrial',
     metaTitle: 'Recuperação Industrial | TORNOGRAN LTDA',
     metaDescription:
       'Recuperação industrial de componentes desgastados, soldagem, usinagem e recomposição para mineração, máquinas pesadas e indústrias.',
     serviceName: 'Recuperação industrial',
+    cardText: 'Reparo técnico para reduzir paradas e reaproveitar ativos.',
     image: '/assets/recuperacao-cat-antes.png',
     intro:
-      'A recuperação industrial prolonga a vida útil de componentes desgastados e reduz custos com substituições emergenciais.',
+      'Recuperação técnica para prolongar a vida útil de componentes e reduzir paradas.',
     paragraphs: [
       'A TORNOGRAN avalia o desgaste do componente e define o processo adequado para recomposição, reforço, soldagem, usinagem e acabamento funcional.',
       'O objetivo é devolver confiabilidade ao conjunto, reduzir paradas não planejadas e manter a operação produtiva com segurança.',
@@ -80,14 +82,15 @@ export const seoServicePages = {
   '/hardox': {
     slug: 'hardox-seo',
     eyebrow: 'Hardox',
-    h1: 'Soluções em Hardox para mineração e alto desgaste',
+    h1: 'Hardox para mineração',
     metaTitle: 'Hardox para Mineração | TORNOGRAN LTDA',
     metaDescription:
       'Soluções em aço Hardox para componentes antidesgaste, mineração, caçambas, revestimentos e aplicações de alta durabilidade.',
     serviceName: 'Soluções em Hardox',
+    cardText: 'Aplicações antidesgaste para mineração e impacto severo.',
     image: '/assets/instagram-concha-carregadeira.jpg',
     intro:
-      'A TORNOGRAN participa do programa Hardox Wearparts e desenvolve soluções para componentes sujeitos a abrasão, impacto e desgaste severo.',
+      'Soluções antidesgaste para abrasão, impacto e operações de alta exigência.',
     paragraphs: [
       'O aço Hardox é aplicado em peças, revestimentos e componentes que precisam de maior vida útil em ambientes agressivos.',
       'Na mineração, essas soluções ajudam a reduzir trocas frequentes, melhorar disponibilidade e aumentar a confiabilidade operacional.',
@@ -119,14 +122,15 @@ export const seoServicePages = {
   '/caldeiraria-industrial': {
     slug: 'caldeiraria-industrial',
     eyebrow: 'Caldeiraria industrial',
-    h1: 'Caldeiraria industrial para estruturas e componentes sob demanda',
+    h1: 'Caldeiraria industrial',
     metaTitle: 'Caldeiraria Industrial | TORNOGRAN LTDA',
     metaDescription:
       'Caldeiraria industrial, soldagem, fabricação e recuperação de estruturas e componentes para mineração, máquinas pesadas e indústrias.',
     serviceName: 'Caldeiraria industrial',
+    cardText: 'Estruturas, reforços e soldagem para operação pesada.',
     image: '/assets/soldagem-campo.png',
     intro:
-      'A caldeiraria industrial atende demandas de fabricação, reforço e recuperação de estruturas metálicas e componentes de grande porte.',
+      'Fabricação, reforço e recuperação de estruturas metálicas e componentes robustos.',
     paragraphs: [
       'A TORNOGRAN combina experiência em soldagem, recuperação e fabricação para entregar soluções robustas para ambientes industriais exigentes.',
       'O serviço é indicado para peças, estruturas e conjuntos que precisam de resistência mecânica, adaptação de campo e confiabilidade.',
@@ -155,17 +159,58 @@ export const seoServicePages = {
       },
     ],
   },
+  '/manutencao-industrial': {
+    slug: 'manutencao-industrial',
+    eyebrow: 'Manutenção industrial',
+    h1: 'Manutenção industrial',
+    metaTitle: 'Manutenção Industrial | TORNOGRAN LTDA',
+    metaDescription:
+      'Manutenção industrial para equipamentos, componentes mecânicos e máquinas pesadas. Ajustes, reparos, soldagem e fabricação sob demanda.',
+    serviceName: 'Manutenção industrial',
+    cardText: 'Reparos, ajustes e suporte para manter a operação ativa.',
+    image: '/assets/recuperacao-cat-depois.png',
+    intro:
+      'Apoio técnico para manter equipamentos produtivos, seguros e prontos para ciclos intensos de operação.',
+    paragraphs: [
+      'A TORNOGRAN atua em demandas corretivas e preventivas, com foco em reduzir paradas e recuperar a confiabilidade de componentes industriais.',
+      'O atendimento combina diagnóstico, soldagem, usinagem, ajustes e fabricação de partes mecânicas conforme a necessidade da operação.',
+    ],
+    topics: [
+      'Intervenções corretivas e preventivas',
+      'Ajustes e reformas em componentes mecânicos',
+      'Suporte para plantas industriais e mineradoras',
+      'Fabricação de partes sob demanda',
+    ],
+    faq: [
+      {
+        question: 'A TORNOGRAN realiza manutenção corretiva?',
+        answer:
+          'Sim. A empresa atende demandas corretivas em componentes industriais, máquinas pesadas e equipamentos sujeitos a desgaste.',
+      },
+      {
+        question: 'A manutenção pode envolver soldagem e usinagem?',
+        answer:
+          'Sim. A TORNOGRAN integra soldagem, usinagem, recuperação e fabricação conforme a necessidade técnica do componente.',
+      },
+      {
+        question: 'Quais informações ajudam no orçamento de manutenção?',
+        answer:
+          'Fotos, medidas, sintomas da falha, aplicação, urgência e histórico do equipamento ajudam a avaliar a melhor solução.',
+      },
+    ],
+  },
   '/fabricacao-sob-desenho': {
     slug: 'fabricacao-sob-desenho',
     eyebrow: 'Fabricação sob desenho',
-    h1: 'Fabricação sob desenho para peças industriais especiais',
+    h1: 'Fabricação sob desenho',
     metaTitle: 'Fabricação Sob Desenho | TORNOGRAN LTDA',
     metaDescription:
       'Fabricação sob desenho, amostra ou engenharia reversa para peças industriais, componentes de máquinas pesadas e mineração.',
     serviceName: 'Fabricação sob desenho',
+    cardText: 'Peças especiais por desenho, amostra ou necessidade de campo.',
     image: '/assets/instagram-concha-fachada.jpg',
     intro:
-      'A fabricação sob desenho transforma demandas técnicas em peças especiais para aplicações industriais que exigem encaixe, resistência e prazo.',
+      'Peças especiais por desenho, amostra ou necessidade operacional.',
     paragraphs: [
       'A TORNOGRAN pode fabricar componentes a partir de desenho técnico, amostra, medidas, fotos ou necessidade operacional.',
       'Esse serviço é indicado quando a peça pronta não atende, quando há urgência de reposição ou quando o componente precisa de adaptação específica.',

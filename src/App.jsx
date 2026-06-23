@@ -23,7 +23,6 @@ function Routes() {
   };
 
   const servicePage = seoServicePages[path];
-  const isKnownRoute = Boolean(routes[path] || servicePage);
 
   useEffect(() => {
     applySEO(
@@ -38,11 +37,15 @@ function Routes() {
     trackPageView(path);
   }, [path, servicePage]);
 
+  if (routes[path]) {
+    return routes[path];
+  }
+
   if (servicePage) {
     return <SeoServicePage page={servicePage} path={path} />;
   }
 
-  return isKnownRoute ? routes[path] : <NotFound />;
+  return <NotFound />;
 }
 
 export default function App() {
