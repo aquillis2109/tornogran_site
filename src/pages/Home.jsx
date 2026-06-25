@@ -4,16 +4,20 @@ import { IndustrialCases } from '../components/IndustrialCases.jsx';
 import { LocalPresence } from '../components/LocalPresence.jsx';
 import { Link } from '../components/Router.jsx';
 import { Section } from '../components/Section.jsx';
-import { differentials, processSteps, services, whatsappUrl } from '../data/site.js';
+import { differentials, processSteps, whatsappUrl } from '../data/site.js';
 import { trackQuoteClick, trackWhatsAppClick } from '../lib/analytics.js';
 
 const operationImages = [
   { src: '/assets/oficina-geral.png', title: 'Oficina industrial' },
+  { src: '/assets/whatsapp-concha-cinza-lateral.jpeg', title: 'Concha fabricada sob demanda' },
+  { src: '/assets/whatsapp-concha-cinza-frontal.jpeg', title: 'Componente de grande porte' },
+  { src: '/assets/whatsapp-concha-hardox-frontal.jpeg', title: 'Concha Hardox finalizada' },
   { src: '/assets/soldagem-campo.png', title: 'Soldagem em componente pesado' },
   { src: '/assets/concha-fachada.png', title: 'Peças sob demanda' },
   { src: '/assets/instagram-concha-fachada.jpg', title: 'Concha sob demanda' },
   { src: '/assets/instagram-operacao-campo.jpg', title: 'Operação em campo' },
   { src: '/assets/instagram-hardox-soldado.jpg', title: 'Soluções antidesgaste' },
+  { src: '/assets/whatsapp-concha-cinza-dentes.jpeg', title: 'Acabamento e dentes reforçados' },
 ];
 
 const trustMetrics = [
@@ -132,23 +136,6 @@ export function Home() {
       </Section>
 
       <Section
-        eyebrow="Serviços"
-        title="Soluções mecânicas para alta solicitação"
-        text="Da peça sob medida à recuperação de conjuntos desgastados, a TORNOGRAN atua com visão prática de operação industrial."
-        className="dark-section"
-      >
-        <div className="service-grid">
-          {services.map(({ slug, title, intro, icon: Icon }) => (
-            <Link key={title} path={`/servicos#${slug}`} className="service-card">
-              <Icon size={28} />
-              <h3>{title}</h3>
-              <p>{intro}</p>
-            </Link>
-          ))}
-        </div>
-      </Section>
-
-      <Section
         eyebrow="Estrutura"
         title="Serviços executados com estrutura real de oficina"
         text="Imagens de processos e componentes que mostram a atuação da TORNOGRAN em corte, soldagem, recuperação e soluções para desgaste."
@@ -171,6 +158,15 @@ export function Home() {
                 </article>
               ))}
             </div>
+          </div>
+          <div className="work-video-panel">
+            <div>
+              <p className="eyebrow">Vídeo técnico</p>
+              <h3>Registro real de operação e fabricação</h3>
+            </div>
+            <video controls preload="metadata" playsInline>
+              <source src="/assets/whatsapp-video-operacao.mp4" type="video/mp4" />
+            </video>
           </div>
         </div>
       </Section>

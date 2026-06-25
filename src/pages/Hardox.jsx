@@ -11,6 +11,9 @@ const benefits = [
 ];
 
 const hardoxParts = [
+  { src: '/assets/whatsapp-concha-hardox-frontal.jpeg', title: 'Concha Hardox finalizada' },
+  { src: '/assets/whatsapp-concha-hardox-suspensa.jpeg', title: 'Componente antidesgaste suspenso' },
+  { src: '/assets/whatsapp-concha-hardox-vermelha.jpeg', title: 'Aplicação Hardox em concha' },
   { src: '/assets/concha-fachada.png', title: 'Concha sob demanda' },
   { src: '/assets/hardox-concha-02.jpg', title: 'Componente antidesgaste' },
   { src: '/assets/instagram-concha-carregadeira.jpg', title: 'Concha para grande porte' },
