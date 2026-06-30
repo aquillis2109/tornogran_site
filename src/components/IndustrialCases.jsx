@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { ArrowRight, CheckCircle2, Images, Target, Wrench, X } from 'lucide-react';
-import { industrialCases } from '../data/cases.js';
+import { getCases, listenAdminData } from '../lib/adminStore.js';
 
 const caseSteps = [
   { key: 'challenge', label: 'Desafio', icon: Target },
@@ -9,6 +9,7 @@ const caseSteps = [
 ];
 
 export function IndustrialCases() {
+  const [cases, setCases] = useState(() => getCases());
   const [activeCase, setActiveCase] = useState(null);
 
   const activeImages = useMemo(() => {
@@ -20,6 +21,10 @@ export function IndustrialCases() {
       ...activeCase.gallery.map((image) => ({ ...image, label: 'Galeria' })),
     ];
   }, [activeCase]);
+
+  useEffect(() => {
+    return listenAdminData(() => setCases(getCases()));
+  }, []);
 
   useEffect(() => {
     if (!activeCase) return undefined;
@@ -40,7 +45,7 @@ export function IndustrialCases() {
   return (
     <>
       <div className="case-stack">
-        {industrialCases.map((caseItem, index) => (
+        {cases.map((caseItem, index) => (
           <article key={caseItem.title} className="case-card">
             <div className="case-content">
               <span className="case-number">{String(index + 1).padStart(2, '0')}</span>

@@ -1,18 +1,19 @@
 import { useState } from 'react';
 import { MoreHorizontal } from 'lucide-react';
+import { resolveImage, useAdminContent } from '../lib/useAdminContent.js';
 
 const aboutItems = [
   {
     title: 'História',
-    text: 'Somos uma empresa que oferece facilidade a seus clientes com produtos na área de mineração e máquinas pesadas, além de serviços de usinagem, torno e solda em geral. A Tornogran surgiu através de uma demanda crescente do mercado de mineração do Norte do Estado do Espírito Santo, que buscava por uma empresa que fosse de encontro as suas necessidades. Com mais de 10 anos de mercado, adquirimos vasta experiência no Setor de usinagem e tornearia, por isso conseguimos evoluir e ampliar nosso catálogo de produtos e serviços.',
+    text: 'Somos uma empresa que oferece soluções para clientes das áreas de mineração e máquinas pesadas, além de serviços de usinagem, torno e solda em geral. A Tornogran surgiu a partir de uma demanda crescente do mercado de mineração do Norte do Estado do Espírito Santo, que buscava uma empresa capaz de atender às suas necessidades. Com mais de 18 anos de mercado, adquirimos vasta experiência no setor de usinagem e tornearia, evoluindo e ampliando nosso catálogo de produtos e serviços.',
   },
   {
     title: 'Missão',
-    text: 'Através de nossos produtos e serviços de qualidade, atendimento personalizado e agilidade nas entregas, a Tornogran se tornou uma referência no setor de peças e serviços, em especial para o mercado de mineração, porém atende a diversos outros setores com seus serviços de qualidade, como Usinas Hidrelétricas, mecânicas entre outros.',
+    text: 'Por meio de produtos e serviços de qualidade, atendimento personalizado e agilidade nas entregas, a Tornogran se tornou referência no setor de peças e serviços, especialmente para o mercado de mineração. Também atende outros segmentos, como usinas hidrelétricas, mecânicas e indústrias em geral.',
   },
   {
     title: 'Visão',
-    text: 'Se tornar a referência na Região Sudeste do Brasil em produtos para mineração e oferecer os melhores serviços nas áreas de: usinagem, torno e solda em geral.',
+    text: 'Tornar-se referência na Região Sudeste do Brasil em produtos para mineração e oferecer serviços de excelência nas áreas de usinagem, torno e solda em geral.',
   },
   {
     title: 'Valores',
@@ -22,6 +23,11 @@ const aboutItems = [
 
 export function About() {
   const [openIndex, setOpenIndex] = useState(0);
+  const content = useAdminContent();
+  const mainImage = resolveImage(content.aboutMainImage, {
+    src: '/assets/fachada-tornogran.png',
+    alt: 'Estrutura industrial da Tornogran',
+  });
 
   return (
     <>
@@ -69,8 +75,8 @@ export function About() {
           <div className="relative">
             <div className="absolute -left-5 -top-5 h-28 w-28 bg-[#f6c400]" />
             <img
-              src="/assets/fachada-tornogran.png"
-              alt="Estrutura industrial da Tornogran"
+              src={mainImage.src}
+              alt={mainImage.alt || 'Estrutura industrial da Tornogran'}
               className="relative z-10 h-[520px] w-full object-cover shadow-[0_28px_70px_rgba(23,37,41,0.22)]"
               loading="lazy"
               decoding="async"

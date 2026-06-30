@@ -6,6 +6,7 @@ import { Link } from '../components/Router.jsx';
 import { Section } from '../components/Section.jsx';
 import { differentials, processSteps, whatsappUrl } from '../data/site.js';
 import { trackQuoteClick, trackWhatsAppClick } from '../lib/analytics.js';
+import { resolveImage, resolveImageList, useAdminContent } from '../lib/useAdminContent.js';
 
 const operationImages = [
   { src: '/assets/oficina-geral.png', title: 'Oficina industrial' },
@@ -49,6 +50,15 @@ const trustMetrics = [
 
 export function Home() {
   const galleryRef = useRef(null);
+  const content = useAdminContent();
+  const heroImage = resolveImage(content.homeHeroImage, {
+    src: '/assets/hero-fachada-tornogran-optimized.jpg',
+    alt: 'Fachada da Tornogran com estrutura industrial e máquinas pesadas',
+  });
+  const galleryImages = resolveImageList(
+    content.homeGalleryImages,
+    operationImages.map((item) => ({ src: item.src, alt: item.title, name: item.title })),
+  );
 
   const scrollGallery = (direction) => {
     galleryRef.current?.scrollBy({
@@ -62,8 +72,8 @@ export function Home() {
       <section className="hero">
         <div className="absolute inset-0">
           <img
-            src="/assets/hero-fachada-tornogran-optimized.jpg"
-            alt="Fachada da Tornogran com estrutura industrial e máquinas pesadas"
+            src={heroImage.src}
+            alt={heroImage.alt || 'Fachada da Tornogran com estrutura industrial e máquinas pesadas'}
             className="h-full w-full object-cover object-center"
             decoding="async"
             fetchPriority="high"
@@ -151,10 +161,10 @@ export function Home() {
           </div>
           <div ref={galleryRef} className="work-gallery-viewport">
             <div className="work-gallery" aria-label="Galeria de estrutura industrial em loop">
-              {[...operationImages, ...operationImages].map((item, index) => (
+              {[...galleryImages, ...galleryImages].map((item, index) => (
                 <article key={`${item.src}-${index}`} className="work-gallery-card">
-                  <img src={item.src} alt={item.title} loading="lazy" decoding="async" />
-                  <span>{item.title}</span>
+                  <img src={item.src} alt={item.alt || item.name || 'Imagem da estrutura Tornogran'} loading="lazy" decoding="async" />
+                  <span>{item.name || item.alt || 'Imagem técnica'}</span>
                 </article>
               ))}
             </div>

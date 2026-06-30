@@ -2,6 +2,7 @@ import { CheckCircle2, ShieldCheck } from 'lucide-react';
 import { Link } from '../components/Router.jsx';
 import { hardoxApplications } from '../data/site.js';
 import { trackQuoteClick } from '../lib/analytics.js';
+import { resolveImage, resolveImageList, useAdminContent } from '../lib/useAdminContent.js';
 
 const benefits = [
   'Maior vida útil em zonas de desgaste',
@@ -23,6 +24,16 @@ const hardoxParts = [
 const hardoxUrl = 'https://www.hardoxwearparts.com/pt-br/';
 
 export function Hardox() {
+  const content = useAdminContent();
+  const mainImage = resolveImage(content.hardoxMainImage, {
+    src: '/assets/chapas-hardox.jpg',
+    alt: 'Chapas de aço Hardox',
+  });
+  const galleryImages = resolveImageList(
+    content.hardoxGalleryImages,
+    hardoxParts.map((item) => ({ src: item.src, alt: item.title, name: item.title })),
+  );
+
   return (
     <>
       <section className="hardox-hero">
@@ -49,8 +60,8 @@ export function Hardox() {
           <a className="hardox-image-panel" href={hardoxUrl} target="_blank" rel="noreferrer" aria-label="Abrir site Hardox Wearparts">
             <img
               className="hardox-plate-image"
-              src="/assets/chapas-hardox.jpg"
-              alt="Chapas de aço Hardox"
+              src={mainImage.src}
+              alt={mainImage.alt || 'Chapas de aço Hardox'}
               decoding="async"
               fetchPriority="high"
             />
@@ -90,10 +101,10 @@ export function Hardox() {
             ))}
           </div>
           <div className="mt-12 grid gap-5 md:grid-cols-2">
-            {hardoxParts.map((item) => (
+            {galleryImages.map((item) => (
               <article key={item.src} className="hardox-part-card">
-                <img src={item.src} alt={item.title} loading="lazy" decoding="async" />
-                <span>{item.title}</span>
+                <img src={item.src} alt={item.alt || item.name || 'Aplicação Hardox'} loading="lazy" decoding="async" />
+                <span>{item.name || item.alt || 'Aplicação Hardox'}</span>
               </article>
             ))}
           </div>

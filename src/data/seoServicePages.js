@@ -23,7 +23,7 @@ export const seoServicePages = {
     ],
     faq: [
       {
-        question: 'A TORNOGRAN atende usinagem de peças de grande porte?',
+        question: 'A TORNOGRAN realiza usinagem de peças de grande porte?',
         answer:
           'Sim. A empresa atua com usinagem pesada para componentes industriais, máquinas pesadas e demandas de mineração.',
       },
@@ -153,7 +153,7 @@ export const seoServicePages = {
           'Sim. A TORNOGRAN pode avaliar desenho, amostra, fotos ou necessidade de campo para fabricar ou recuperar componentes.',
       },
       {
-        question: 'Caldeiraria industrial atende máquinas pesadas?',
+        question: 'A caldeiraria industrial atende máquinas pesadas?',
         answer:
           'Sim. O serviço é aplicado a estruturas e componentes de máquinas pesadas, mineração e operações industriais.',
       },

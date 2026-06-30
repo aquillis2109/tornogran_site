@@ -2,6 +2,8 @@ import { PageHero, Section } from '../components/Section.jsx';
 import { Link } from '../components/Router.jsx';
 import { services } from '../data/site.js';
 import { seoServicePages } from '../data/seoServicePages.js';
+import { useEffect, useMemo, useState } from 'react';
+import { getServices, listenAdminData, normalizeImageValue } from '../lib/adminStore.js';
 
 const serviceImages = {
   'usinagem-pesada': '/assets/oficina-cnc-ampla.png',
@@ -20,6 +22,15 @@ const serviceDetailLinks = {
 };
 
 export function Services() {
+  const [adminServices, setAdminServices] = useState(getServices);
+  const serviceConfig = useMemo(() => {
+    return Object.fromEntries(adminServices.map((service) => [service.slug, service]));
+  }, [adminServices]);
+
+  useEffect(() => {
+    return listenAdminData(() => setAdminServices(getServices()));
+  }, []);
+
   return (
     <>
       <PageHero
@@ -39,23 +50,36 @@ export function Services() {
           ))}
         </div>
         <div className="grid gap-5">
-          {services.map(({ slug, title, intro, details, icon: Icon }) => (
-            <Link key={slug} id={slug} path={serviceDetailLinks[slug]} className="detail-row detail-row-link">
-              <div className="detail-icon">
-                <Icon size={30} />
-              </div>
-              <div>
-                <h2>{title}</h2>
-                <p>{intro}</p>
-                <ul>
-                  {details.map((detail) => (
-                    <li key={detail}>{detail}</li>
-                  ))}
-                </ul>
-              </div>
-              <img className="detail-image" src={serviceImages[slug]} alt={title} loading="lazy" decoding="async" />
-            </Link>
-          ))}
+          {services.map(({ slug, title, intro, details, icon: Icon }) => {
+            const config = serviceConfig[slug];
+            const mainImage = normalizeImageValue(config?.image) || { src: serviceImages[slug], alt: title };
+            const gallery = (config?.gallery || []).map(normalizeImageValue).filter(Boolean);
+
+            return (
+              <Link key={slug} id={slug} path={serviceDetailLinks[slug]} className="detail-row detail-row-link">
+                <div className="detail-icon">
+                  <Icon size={30} />
+                </div>
+                <div>
+                  <h2>{config?.name || title}</h2>
+                  <p>{config?.description || intro}</p>
+                  <ul>
+                    {details.map((detail) => (
+                      <li key={detail}>{detail}</li>
+                    ))}
+                  </ul>
+                  {gallery.length > 0 && (
+                    <div className="mt-5 grid grid-cols-3 gap-2">
+                      {gallery.slice(0, 3).map((image) => (
+                        <img key={image.src} className="h-20 rounded-xl object-cover" src={image.src} alt={image.alt || title} loading="lazy" decoding="async" />
+                      ))}
+                    </div>
+                  )}
+                </div>
+                <img className="detail-image" src={mainImage.src} alt={mainImage.alt || title} loading="lazy" decoding="async" />
+              </Link>
+            );
+          })}
         </div>
       </Section>
     </>

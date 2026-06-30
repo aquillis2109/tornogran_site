@@ -15,6 +15,7 @@ import {
   whatsappUrl,
 } from '../data/site.js';
 import { trackQuoteFormSubmit, trackWhatsAppClick } from '../lib/analytics.js';
+import { addLeadFromQuote } from '../lib/adminStore.js';
 
 const MAX_FILE_SIZE = 20 * 1024 * 1024;
 const ACCEPTED_EXTENSIONS = ['pdf', 'dwg', 'dxf', 'step', 'jpg', 'jpeg', 'png'];
@@ -111,6 +112,7 @@ export function Contact() {
 
     const payload = buildQuotePayload(form, file);
     window.sessionStorage.setItem('tornogran:lastQuoteRequest', JSON.stringify(payload));
+    addLeadFromQuote(payload);
 
     form.append('_subject', `Novo orçamento pelo site - ${payload.request.service || 'TORNOGRAN'}`);
     form.append('_cc', secondaryEmail);
