@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getContent, listenAdminData, normalizeImageValue } from './adminStore.js';
+import { getContent, getSettings, listenAdminData, normalizeImageValue } from './adminStore.js';
 
 export function useAdminContent() {
   const [content, setContent] = useState(getContent);
@@ -9,6 +9,16 @@ export function useAdminContent() {
   }, []);
 
   return content;
+}
+
+export function useAdminSettings() {
+  const [settings, setSettings] = useState(getSettings);
+
+  useEffect(() => {
+    return listenAdminData(() => setSettings(getSettings()));
+  }, []);
+
+  return settings;
 }
 
 export function resolveImage(value, fallback) {

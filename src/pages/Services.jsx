@@ -4,6 +4,7 @@ import { services } from '../data/site.js';
 import { seoServicePages } from '../data/seoServicePages.js';
 import { useEffect, useMemo, useState } from 'react';
 import { getServices, listenAdminData, normalizeImageValue } from '../lib/adminStore.js';
+import { resolveImage, useAdminContent } from '../lib/useAdminContent.js';
 
 const serviceImages = {
   'usinagem-pesada': '/assets/oficina-cnc-ampla.png',
@@ -23,6 +24,11 @@ const serviceDetailLinks = {
 
 export function Services() {
   const [adminServices, setAdminServices] = useState(getServices);
+  const content = useAdminContent();
+  const bannerImage = resolveImage(content.servicesBannerImage, {
+    src: '/assets/oficina-cnc-ampla.png',
+    alt: 'Oficina industrial com usinagem pesada e manutenção',
+  });
   const serviceConfig = useMemo(() => {
     return Object.fromEntries(adminServices.map((service) => [service.slug, service]));
   }, [adminServices]);
@@ -37,8 +43,8 @@ export function Services() {
         eyebrow="Serviços"
         title="Capacidade industrial para fabricação, reparo e manutenção"
         text="Serviços detalhados para componentes de grande porte, peças sob medida e necessidades de manutenção em ambientes industriais de alta exigência."
-        backgroundImage="/assets/oficina-cnc-ampla.png"
-        imageAlt="Oficina industrial com usinagem pesada e manutenção"
+        backgroundImage={bannerImage.src}
+        imageAlt={bannerImage.alt || 'Oficina industrial com usinagem pesada e manutenção'}
       />
       <Section>
         <div className="seo-link-grid mb-10">
@@ -53,7 +59,6 @@ export function Services() {
           {services.map(({ slug, title, intro, details, icon: Icon }) => {
             const config = serviceConfig[slug];
             const mainImage = normalizeImageValue(config?.image) || { src: serviceImages[slug], alt: title };
-            const gallery = (config?.gallery || []).map(normalizeImageValue).filter(Boolean);
 
             return (
               <Link key={slug} id={slug} path={serviceDetailLinks[slug]} className="detail-row detail-row-link">
@@ -68,13 +73,6 @@ export function Services() {
                       <li key={detail}>{detail}</li>
                     ))}
                   </ul>
-                  {gallery.length > 0 && (
-                    <div className="mt-5 grid grid-cols-3 gap-2">
-                      {gallery.slice(0, 3).map((image) => (
-                        <img key={image.src} className="h-20 rounded-xl object-cover" src={image.src} alt={image.alt || title} loading="lazy" decoding="async" />
-                      ))}
-                    </div>
-                  )}
                 </div>
                 <img className="detail-image" src={mainImage.src} alt={mainImage.alt || title} loading="lazy" decoding="async" />
               </Link>

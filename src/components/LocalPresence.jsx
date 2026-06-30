@@ -7,8 +7,15 @@ import {
   googleMapsEmbedUrl,
   serviceArea,
 } from '../data/site.js';
+import { useAdminSettings } from '../lib/useAdminContent.js';
 
 export function LocalPresence() {
+  const settings = useAdminSettings();
+  const phones = [settings.phone, settings.whatsapp].filter(Boolean).join(' / ') || contactPhones;
+  const address = settings.address || contactAddress;
+  const hours = settings.hours || businessHours;
+  const mapsUrl = settings.maps || googleBusinessProfileUrl;
+
   return (
     <div className="local-presence">
       <div className="local-presence-copy">
@@ -24,28 +31,28 @@ export function LocalPresence() {
             <Phone size={20} />
             <span>
               <strong>Telefone</strong>
-              {contactPhones}
+              {phones}
             </span>
           </div>
           <div>
             <MapPin size={20} />
             <span>
               <strong>Endereço</strong>
-              {contactAddress}
+              {address}
             </span>
           </div>
           <div>
             <Clock size={20} />
             <span>
               <strong>Horário</strong>
-              {businessHours}
+              {hours}
             </span>
           </div>
         </div>
 
         <p className="local-service-area">{serviceArea}</p>
 
-        <a className="primary-button" href={googleBusinessProfileUrl} target="_blank" rel="noreferrer">
+        <a className="primary-button" href={mapsUrl} target="_blank" rel="noreferrer">
           Abrir no Google Maps <ArrowRight size={18} />
         </a>
       </div>

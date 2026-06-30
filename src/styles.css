@@ -286,8 +286,28 @@ textarea {
     @apply grid gap-7;
   }
 
+  .case-home-callout {
+    @apply relative z-10 flex flex-col gap-6 rounded-2xl border border-[#d8e1e5] bg-white p-6 shadow-[0_26px_70px_rgba(23,37,41,0.14),0_2px_0_rgba(255,255,255,0.95)_inset] md:flex-row md:items-center md:justify-between md:p-8;
+  }
+
+  .case-home-callout span {
+    @apply text-xs font-black uppercase tracking-[0.22em] text-orange;
+  }
+
+  .case-home-callout h3 {
+    @apply mt-3 text-2xl font-black text-[#172529] md:text-4xl;
+  }
+
+  .case-home-callout p {
+    @apply mt-3 max-w-2xl leading-7 text-[#62747b];
+  }
+
   .case-card {
     @apply grid overflow-hidden rounded-2xl border border-[#d8e1e5] bg-white shadow-[0_28px_76px_rgba(23,37,41,0.14),0_2px_0_rgba(255,255,255,0.95)_inset] transition duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_36px_96px_rgba(23,37,41,0.2),0_2px_0_rgba(255,255,255,0.95)_inset] lg:grid-cols-[1.03fr_0.97fr];
+  }
+
+  .case-show-more {
+    @apply mt-8 flex justify-center;
   }
 
   .case-content {
@@ -990,6 +1010,10 @@ textarea {
 
   .admin-page-head-row {
     @apply flex flex-col gap-4 md:flex-row md:items-end md:justify-between;
+  }
+
+  .admin-head-actions {
+    @apply flex flex-wrap items-center gap-3;
   }
 
   .admin-kpi-grid {

@@ -8,9 +8,12 @@ const caseSteps = [
   { key: 'result', label: 'Resultado', icon: CheckCircle2 },
 ];
 
-export function IndustrialCases() {
+export function IndustrialCases({ initialVisible, increment = 2, showMore = false }) {
   const [cases, setCases] = useState(() => getCases());
   const [activeCase, setActiveCase] = useState(null);
+  const [visibleCount, setVisibleCount] = useState(initialVisible || getCases().length);
+  const visibleCases = cases.slice(0, visibleCount);
+  const hasMore = visibleCount < cases.length;
 
   const activeImages = useMemo(() => {
     if (!activeCase) return [];
@@ -45,7 +48,7 @@ export function IndustrialCases() {
   return (
     <>
       <div className="case-stack">
-        {cases.map((caseItem, index) => (
+        {visibleCases.map((caseItem, index) => (
           <article key={caseItem.title} className="case-card">
             <div className="case-content">
               <span className="case-number">{String(index + 1).padStart(2, '0')}</span>
@@ -94,6 +97,14 @@ export function IndustrialCases() {
           </article>
         ))}
       </div>
+
+      {showMore && hasMore && (
+        <div className="case-show-more">
+          <button type="button" className="primary-button" onClick={() => setVisibleCount((value) => value + increment)}>
+            Mostrar mais <ArrowRight size={18} />
+          </button>
+        </div>
+      )}
 
       {activeCase && (
         <div className="case-modal" role="dialog" aria-modal="true" aria-labelledby="case-modal-title">

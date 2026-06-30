@@ -43,9 +43,18 @@ const defaultContent = {
   homeHeroImage: { src: '/assets/fachada-tornogran.png', alt: 'Fachada industrial da Tornogran' },
   homeHardoxImage: { src: '/assets/chapas-hardox.jpg', alt: 'Chapas de aço Hardox' },
   homeStructureImage: { src: '/assets/oficina-geral.png', alt: 'Estrutura industrial da Tornogran' },
+  servicesBannerImage: { src: '/assets/oficina-cnc-ampla.png', alt: 'Oficina industrial com usinagem pesada e manutenção' },
   homeGalleryImages: [
     { src: '/assets/oficina-geral.png', alt: 'Oficina industrial' },
+    { src: '/assets/whatsapp-concha-cinza-lateral.jpeg', alt: 'Concha fabricada sob demanda' },
+    { src: '/assets/whatsapp-concha-cinza-frontal.jpeg', alt: 'Componente de grande porte' },
+    { src: '/assets/whatsapp-concha-hardox-frontal.jpeg', alt: 'Concha Hardox finalizada' },
     { src: '/assets/soldagem-campo.png', alt: 'Soldagem em componente pesado' },
+    { src: '/assets/concha-fachada.png', alt: 'Peças sob demanda' },
+    { src: '/assets/instagram-concha-fachada.jpg', alt: 'Concha sob demanda' },
+    { src: '/assets/instagram-operacao-campo.jpg', alt: 'Operação em campo' },
+    { src: '/assets/instagram-hardox-soldado.jpg', alt: 'Soluções antidesgaste' },
+    { src: '/assets/whatsapp-concha-cinza-dentes.jpeg', alt: 'Acabamento e dentes reforçados' },
   ],
   aboutMainImage: { src: '/assets/fachada-tornogran.png', alt: 'Estrutura da Tornogran' },
   aboutTeamImage: { src: '/assets/oficina-cnc-ampla.png', alt: 'Equipe técnica em operação' },
@@ -54,10 +63,53 @@ const defaultContent = {
   hardoxGalleryImages: [
     { src: '/assets/whatsapp-concha-hardox-frontal.jpeg', alt: 'Concha Hardox finalizada' },
     { src: '/assets/whatsapp-concha-hardox-suspensa.jpeg', alt: 'Componente Hardox suspenso' },
+    { src: '/assets/whatsapp-concha-hardox-vermelha.jpeg', alt: 'Aplicação Hardox em concha' },
+    { src: '/assets/concha-fachada.png', alt: 'Concha sob demanda' },
+    { src: '/assets/hardox-concha-02.jpg', alt: 'Componente antidesgaste' },
+    { src: '/assets/instagram-concha-carregadeira.jpg', alt: 'Concha para grande porte' },
+    { src: '/assets/instagram-hardox-soldado.jpg', alt: 'Aplicação antidesgaste' },
   ],
   aboutTitle: 'Principais pontos sobre a empresa',
   hardoxTitle: 'Soluções em Hardox para mineração',
   footerText: 'TORNOGRAN LTDA - indústria, recuperação e fabricação para operações pesadas.',
+};
+
+const defaultServiceImages = {
+  'usinagem-pesada': {
+    image: { src: '/assets/oficina-cnc-ampla.png', alt: 'Máquina CNC em operação na Tornogran' },
+    gallery: [
+      { src: '/assets/servico-corte-cnc.jpg', alt: 'Corte CNC em chapa industrial' },
+      { src: '/assets/oficina-geral.png', alt: 'Oficina industrial Tornogran' },
+    ],
+  },
+  'recuperacao-de-componentes': {
+    image: { src: '/assets/recuperacao-cat-antes.png', alt: 'Componente CAT antes da recuperação' },
+    gallery: [
+      { src: '/assets/recuperacao-cat-depois.png', alt: 'Componente CAT recuperado' },
+      { src: '/assets/servico-recuperacao.jpg', alt: 'Recuperação de componente industrial' },
+    ],
+  },
+  'manutencao-industrial': {
+    image: { src: '/assets/maquina-pesada-entrega.png', alt: 'Máquina pesada em operação atendida pela Tornogran' },
+    gallery: [
+      { src: '/assets/instagram-operacao-campo.jpg', alt: 'Operação em campo com máquina pesada' },
+      { src: '/assets/oficina-geral.png', alt: 'Estrutura de manutenção industrial' },
+    ],
+  },
+  soldagem: {
+    image: { src: '/assets/soldagem-campo.png', alt: 'Soldagem em componente pesado' },
+    gallery: [
+      { src: '/assets/servico-soldagem.jpg', alt: 'Soldagem industrial' },
+      { src: '/assets/servico-esmerilhamento.jpg', alt: 'Acabamento em componente industrial' },
+    ],
+  },
+  'fabricacao-sob-demanda': {
+    image: { src: '/assets/concha-fachada.png', alt: 'Peça sob demanda fabricada pela Tornogran' },
+    gallery: [
+      { src: '/assets/instagram-concha-fachada.jpg', alt: 'Concha sob demanda' },
+      { src: '/assets/whatsapp-concha-cinza-final.jpeg', alt: 'Componente fabricado sob demanda' },
+    ],
+  },
 };
 
 const defaultSettings = {
@@ -159,6 +211,49 @@ const defaultGallery = [
     createdAt: '2026-06-26T00:00:00.000Z',
   },
 ];
+
+const additionalDefaultGallery = [
+  ['media-hero-otimizada', 'Hero fachada Tornogran', '/assets/hero-fachada-tornogran-optimized.jpg', 'Hero', 'Fachada da Tornogran com estrutura industrial e máquinas pesadas', 'image/jpeg'],
+  ['media-concha-cinza-lateral', 'Concha fabricada sob demanda', '/assets/whatsapp-concha-cinza-lateral.jpeg', 'Galeria', 'Concha fabricada sob demanda', 'image/jpeg'],
+  ['media-concha-cinza-frontal', 'Componente de grande porte', '/assets/whatsapp-concha-cinza-frontal.jpeg', 'Galeria', 'Componente de grande porte', 'image/jpeg'],
+  ['media-concha-hardox-frontal', 'Concha Hardox finalizada', '/assets/whatsapp-concha-hardox-frontal.jpeg', 'Hardox', 'Concha Hardox finalizada', 'image/jpeg'],
+  ['media-concha-fachada', 'Peças sob demanda', '/assets/concha-fachada.png', 'Serviços', 'Peças sob demanda fabricadas pela Tornogran', 'image/png'],
+  ['media-instagram-concha-fachada', 'Concha sob demanda', '/assets/instagram-concha-fachada.jpg', 'Galeria', 'Concha sob demanda', 'image/jpeg'],
+  ['media-instagram-operacao-campo', 'Operação em campo', '/assets/instagram-operacao-campo.jpg', 'Galeria', 'Operação em campo', 'image/jpeg'],
+  ['media-instagram-hardox-soldado', 'Soluções antidesgaste', '/assets/instagram-hardox-soldado.jpg', 'Hardox', 'Soluções antidesgaste', 'image/jpeg'],
+  ['media-concha-cinza-dentes', 'Acabamento e dentes reforçados', '/assets/whatsapp-concha-cinza-dentes.jpeg', 'Galeria', 'Acabamento e dentes reforçados', 'image/jpeg'],
+  ['media-hardox-suspensa', 'Componente Hardox suspenso', '/assets/whatsapp-concha-hardox-suspensa.jpeg', 'Hardox', 'Componente Hardox suspenso', 'image/jpeg'],
+  ['media-hardox-vermelha', 'Aplicação Hardox em concha', '/assets/whatsapp-concha-hardox-vermelha.jpeg', 'Hardox', 'Aplicação Hardox em concha', 'image/jpeg'],
+  ['media-hardox-concha-02', 'Componente antidesgaste', '/assets/hardox-concha-02.jpg', 'Hardox', 'Componente antidesgaste', 'image/jpeg'],
+  ['media-concha-carregadeira', 'Concha para grande porte', '/assets/instagram-concha-carregadeira.jpg', 'Hardox', 'Concha para grande porte', 'image/jpeg'],
+  ['media-corte-cnc', 'Corte CNC', '/assets/servico-corte-cnc.jpg', 'Serviços', 'Corte CNC em chapa industrial', 'image/jpeg'],
+  ['media-servico-recuperacao', 'Recuperação industrial', '/assets/servico-recuperacao.jpg', 'Serviços', 'Recuperação de componente industrial', 'image/jpeg'],
+  ['media-servico-soldagem', 'Soldagem industrial', '/assets/servico-soldagem.jpg', 'Serviços', 'Soldagem industrial', 'image/jpeg'],
+  ['media-servico-esmerilhamento', 'Acabamento industrial', '/assets/servico-esmerilhamento.jpg', 'Serviços', 'Acabamento em componente industrial', 'image/jpeg'],
+  ['media-maquina-entrega', 'Máquina pesada', '/assets/maquina-pesada-entrega.png', 'Serviços', 'Máquina pesada em operação atendida pela Tornogran', 'image/png'],
+  ['media-concha-cinza-final', 'Componente fabricado sob demanda', '/assets/whatsapp-concha-cinza-final.jpeg', 'Galeria', 'Componente fabricado sob demanda', 'image/jpeg'],
+  ['media-concha-recuperacao-antes', 'Componente desgastado', '/assets/whatsapp-concha-recuperacao-antes.jpeg', 'Antes e Depois', 'Componente desgastado antes da recuperação', 'image/jpeg'],
+  ['media-concha-usada-oficina', 'Concha usada na oficina', '/assets/whatsapp-concha-usada-oficina.jpeg', 'Cases', 'Concha usada na oficina antes da recuperação', 'image/jpeg'],
+  ['media-concha-cinza-oficina', 'Componente na oficina', '/assets/whatsapp-concha-cinza-oficina.jpeg', 'Cases', 'Componente industrial na oficina Tornogran', 'image/jpeg'],
+].map(([id, name, src, category, alt, type]) => ({
+  id,
+  name,
+  src,
+  url: src,
+  category,
+  alt,
+  type,
+  size: 0,
+  createdAt: '2026-06-26T00:00:00.000Z',
+}));
+
+function mergeDefaultGallery(items) {
+  const bySrc = new Set(items.map((item) => migrateAssetPath(item.src || item.url || '')));
+  return [
+    ...items,
+    ...additionalDefaultGallery.filter((item) => !bySrc.has(item.src)),
+  ];
+}
 
 function safeJsonParse(value, fallback) {
   try {
@@ -385,8 +480,8 @@ export function getServices() {
     slug: service.slug,
     name: service.title,
     description: service.intro,
-    image: '',
-    gallery: [],
+    image: defaultServiceImages[service.slug]?.image || '',
+    gallery: defaultServiceImages[service.slug]?.gallery || [],
     icon: service.slug,
     seoTitle: `${service.title} | Tornogran`,
     seoDescription: service.intro,
@@ -402,7 +497,7 @@ export function saveServices(items) {
 }
 
 export function getGallery() {
-  return read(keys.gallery, defaultGallery).map(normalizeMediaItem);
+  return mergeDefaultGallery(read(keys.gallery, defaultGallery)).map(normalizeMediaItem);
 }
 
 export function saveGallery(items) {
@@ -416,6 +511,7 @@ export function getContent() {
     homeHeroImage: normalizeImageValue(content.homeHeroImage),
     homeHardoxImage: normalizeImageValue(content.homeHardoxImage),
     homeStructureImage: normalizeImageValue(content.homeStructureImage),
+    servicesBannerImage: normalizeImageValue(content.servicesBannerImage),
     homeGalleryImages: (content.homeGalleryImages || []).map(normalizeImageValue).filter(Boolean),
     aboutMainImage: normalizeImageValue(content.aboutMainImage),
     aboutTeamImage: normalizeImageValue(content.aboutTeamImage),

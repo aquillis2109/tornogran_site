@@ -40,7 +40,7 @@ export function About() {
             </div>
             <p className="eyebrow">Sobre nós</p>
             <h2 className="mt-4 max-w-3xl text-4xl font-black uppercase leading-tight text-[#34393b] md:text-5xl">
-              Principais pontos sobre a empresa
+              {content.aboutTitle || 'Principais pontos sobre a empresa'}
             </h2>
             <p className="mt-6 max-w-3xl leading-8 text-[#6c7478]">
               Nossos princípios fundamentais formam a base da maneira como atuamos em conjunto para atender aos nossos

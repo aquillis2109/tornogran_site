@@ -89,10 +89,10 @@ export function Home() {
           <div className="hero-copy">
             <p className="hero-eyebrow animate-rise">Especialistas em usinagem pesada</p>
             <h1 className="hero-title animate-rise animation-delay-100">
-              Força industrial para operações críticas
+              {content.heroTitle || 'Força industrial para operações críticas'}
             </h1>
             <p className="hero-subtitle animate-rise animation-delay-200">
-              Recuperação de componentes, fabricação sob desenho e soluções Hardox para alta exigência.
+              {content.heroSubtitle || 'Recuperação de componentes, fabricação sob desenho e soluções Hardox para alta exigência.'}
             </p>
 
             <div className="hero-trust-bar animate-rise animation-delay-300">
@@ -183,11 +183,21 @@ export function Home() {
 
       <Section
         eyebrow="Cases"
-        title="Resultados industriais em componentes de alta exigência"
-        text="Projetos executados com foco em disponibilidade, resistência ao desgaste e recuperação técnica de ativos para operações pesadas."
+        title="Portfólio técnico em uma área dedicada"
+        text="Projetos de recuperação, fabricação e soluções antidesgaste ficam organizados em uma página própria, preparada para crescer sem poluir a página inicial."
         className="case-section"
       >
-        <IndustrialCases />
+        <IndustrialCases initialVisible={1} />
+        <div className="case-home-callout mt-7">
+          <div>
+            <span>Portfólio industrial</span>
+            <h3>Mais projetos em uma página dedicada</h3>
+            <p>Veja outros cases com antes, depois, desafio, solução, resultado e galeria técnica.</p>
+          </div>
+          <Link path="/cases" className="primary-button">
+            Ver todos os cases <ArrowRight size={18} />
+          </Link>
+        </div>
       </Section>
 
       <Section eyebrow="Processo" title="Do diagnóstico à entrega técnica">

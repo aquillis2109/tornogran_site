@@ -61,6 +61,10 @@ export function useLocation() {
   return useContext(RouterContext).path;
 }
 
+export function useNavigate() {
+  return useContext(RouterContext).navigate;
+}
+
 export function Link({ path, className, children, onClick, ...props }) {
   const { navigate } = useContext(RouterContext);
 

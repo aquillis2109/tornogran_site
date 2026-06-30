@@ -12,7 +12,7 @@ export function Cases() {
         imageAlt="Estrutura industrial da Tornogran"
       />
       <Section>
-        <IndustrialCases />
+        <IndustrialCases initialVisible={2} increment={2} showMore />
       </Section>
     </>
   );

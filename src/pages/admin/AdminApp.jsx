@@ -17,7 +17,7 @@ import {
   X,
 } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
-import { Link, useLocation } from '../../components/Router.jsx';
+import { Link, useLocation, useNavigate } from '../../components/Router.jsx';
 import { ExportMenu } from '../../components/admin/ExportMenu.jsx';
 import {
   adminUser,
@@ -126,13 +126,15 @@ function goToPath(path) {
 
 function useStoredState(loader, saver) {
   const [value, setValue] = useState(loader);
+  const [savedMessage, setSavedMessage] = useState('');
 
-  function commit(nextValue) {
-    setValue(nextValue);
-    saver(nextValue);
+  function confirm(message = 'Alterações confirmadas com sucesso.') {
+    saver(value);
+    setSavedMessage(message);
+    window.setTimeout(() => setSavedMessage(''), 3200);
   }
 
-  return [value, commit];
+  return [value, setValue, confirm, savedMessage];
 }
 
 function readFileAsDataUrl(file) {
@@ -164,6 +166,7 @@ function collectMediaUsage(image, { content, services, cases }) {
   add(imageSrc(content.homeHardoxImage) === src, 'Home > Hardox');
   add(imageSrc(content.homeStructureImage) === src, 'Home > Estrutura');
   add(imageList(content.homeGalleryImages).some((item) => item.src === src), 'Home > Galeria inicial');
+  add(imageSrc(content.servicesBannerImage) === src, 'Serviços > Banner');
   add(imageSrc(content.aboutMainImage) === src, 'Sobre > Imagem principal');
   add(imageSrc(content.aboutTeamImage) === src, 'Sobre > Equipe');
   add(imageSrc(content.aboutStructureImage) === src, 'Sobre > Estrutura');
@@ -197,6 +200,7 @@ function collectMediaUsageDetails(image, { content, services, cases }) {
   add(imageSrc(content.homeHardoxImage) === src, 'Home > Hardox', 'content|homeHardoxImage|single');
   add(imageSrc(content.homeStructureImage) === src, 'Home > Estrutura', 'content|homeStructureImage|single');
   add(imageList(content.homeGalleryImages).some((item) => item.src === src), 'Home > Galeria inicial', 'content|homeGalleryImages|multiple');
+  add(imageSrc(content.servicesBannerImage) === src, 'Serviços > Banner', 'content|servicesBannerImage|single');
   add(imageSrc(content.aboutMainImage) === src, 'Sobre > Imagem principal', 'content|aboutMainImage|single');
   add(imageSrc(content.aboutTeamImage) === src, 'Sobre > Equipe', 'content|aboutTeamImage|single');
   add(imageSrc(content.aboutStructureImage) === src, 'Sobre > Estrutura', 'content|aboutStructureImage|single');
@@ -296,11 +300,20 @@ function FlexibleGalleryField({ label, value, category, onChange }) {
 }
 
 function Redirect({ to }) {
-  useEffect(() => {
-    goToPath(to);
-  }, [to]);
+  const navigate = useNavigate();
 
-  return null;
+  useEffect(() => {
+    navigate(to);
+  }, [navigate, to]);
+
+  return (
+    <div className="admin-auth-page">
+      <div className="admin-auth-card">
+        <img src="/assets/tornogran-logo.png" alt="Tornogran" />
+        <p>Carregando painel...</p>
+      </div>
+    </div>
+  );
 }
 
 function AdminLogin({ mode = 'login' }) {
@@ -477,7 +490,7 @@ function Dashboard() {
 }
 
 function LeadsAdmin() {
-  const [leads, setLeads] = useStoredState(getLeads, saveLeads);
+  const [leads, setLeads, confirmLeads, leadsMessage] = useStoredState(getLeads, saveLeads);
   const [query, setQuery] = useState('');
   const [status, setStatus] = useState('Todos');
   const [city, setCity] = useState('Todos');
@@ -508,14 +521,20 @@ function LeadsAdmin() {
           <p>Leads</p>
           <h1>Formulários recebidos</h1>
         </div>
-        <ExportMenu
-          rows={filtered}
-          columns={leadExportColumns}
-          filenamePrefix="leads"
-          sheetName="Leads Tornogran"
-          title="Leads Tornogran"
-        />
+        <div className="admin-head-actions">
+          <button type="button" className="admin-primary" onClick={() => confirmLeads('Alterações dos leads confirmadas com sucesso.')}>
+            Confirmar alterações
+          </button>
+          <ExportMenu
+            rows={filtered}
+            columns={leadExportColumns}
+            filenamePrefix="leads"
+            sheetName="Leads Tornogran"
+            title="Leads Tornogran"
+          />
+        </div>
       </div>
+      {leadsMessage && <p className="admin-success">{leadsMessage}</p>}
       <div className="admin-filters">
         <label>
           <Search size={17} />
@@ -591,7 +610,7 @@ function LeadsAdmin() {
 }
 
 function CasesAdmin() {
-  const [cases, setCases] = useStoredState(() => getCases(true), saveCases);
+  const [cases, setCases, confirmCases, casesMessage] = useStoredState(() => getCases(true), saveCases);
   const [activeId, setActiveId] = useState(cases[0]?.id || '');
   const active = cases.find((caseItem) => caseItem.id === activeId) || cases[0];
 
@@ -636,10 +655,16 @@ function CasesAdmin() {
           <p>Cases</p>
           <h1>Portfólio técnico</h1>
         </div>
-        <button type="button" className="admin-primary" onClick={addCase}>
-          Criar case
-        </button>
+        <div className="admin-head-actions">
+          <button type="button" className="admin-secondary" onClick={addCase}>
+            Criar case
+          </button>
+          <button type="button" className="admin-primary" onClick={() => confirmCases('Alterações dos cases confirmadas com sucesso.')}>
+            Confirmar alterações
+          </button>
+        </div>
       </div>
+      {casesMessage && <p className="admin-success">{casesMessage}</p>}
       <div className="admin-editor-grid">
         <div className="admin-list-panel">
           {cases.map((caseItem) => (
@@ -744,7 +769,7 @@ function CasesAdmin() {
 }
 
 function ServicesAdmin() {
-  const [items, setItems] = useStoredState(getServices, saveServices);
+  const [items, setItems, confirmServices, servicesMessage] = useStoredState(getServices, saveServices);
 
   function updateItem(id, field, value) {
     setItems(items.map((item) => (item.id === id ? { ...item, [field]: value } : item)));
@@ -775,10 +800,16 @@ function ServicesAdmin() {
           <p>Serviços</p>
           <h1>Gerenciar serviços</h1>
         </div>
-        <button type="button" className="admin-primary" onClick={addItem}>
-          Adicionar
-        </button>
+        <div className="admin-head-actions">
+          <button type="button" className="admin-secondary" onClick={addItem}>
+            Adicionar
+          </button>
+          <button type="button" className="admin-primary" onClick={() => confirmServices('Alterações dos serviços confirmadas com sucesso.')}>
+            Confirmar alterações
+          </button>
+        </div>
       </div>
+      {servicesMessage && <p className="admin-success">{servicesMessage}</p>}
       <div className="admin-service-list">
         {items
           .slice()
@@ -849,10 +880,10 @@ function ServicesAdmin() {
 }
 
 function MediaAdmin() {
-  const [items, setItems] = useStoredState(getGallery, saveGallery);
-  const [content, setContent] = useStoredState(getContent, saveContent);
-  const [services, setServices] = useStoredState(getServices, saveServices);
-  const [cases, setCases] = useStoredState(() => getCases(true), saveCases);
+  const [items, setItems, confirmGallery] = useStoredState(getGallery, saveGallery);
+  const [content, setContent, confirmContent] = useStoredState(getContent, saveContent);
+  const [services, setServices, confirmMediaServices] = useStoredState(getServices, saveServices);
+  const [cases, setCases, confirmMediaCases] = useStoredState(() => getCases(true), saveCases);
   const [category, setCategory] = useState('Galeria');
   const [query, setQuery] = useState('');
   const [uploadError, setUploadError] = useState('');
@@ -1002,11 +1033,15 @@ function MediaAdmin() {
           type="button"
           className="admin-primary"
           onClick={() => {
-            setUsageMessage(`Alterações salvas com sucesso na página ${activeMediaPage}.`);
+            confirmGallery();
+            confirmContent();
+            confirmMediaServices();
+            confirmMediaCases();
+            setUsageMessage(`Alterações confirmadas com sucesso na página ${activeMediaPage}.`);
             window.setTimeout(() => setUsageMessage(''), 3000);
           }}
         >
-          Salvar alterações
+          Confirmar alterações
         </button>
       </div>
 
@@ -1256,43 +1291,8 @@ function SettingsAdmin() {
   return (
     <>
       <SimpleRecordAdmin type="content" />
-      <ContentImagesAdmin />
       <SimpleRecordAdmin type="settings" />
     </>
-  );
-}
-
-function ContentImagesAdmin() {
-  const [content, setContent] = useStoredState(getContent, saveContent);
-
-  function update(field, value) {
-    setContent({ ...content, [field]: value });
-  }
-
-  return (
-    <section className="admin-page">
-      <div className="admin-page-head">
-        <p>Imagens por página</p>
-        <h1>Controle visual do site</h1>
-      </div>
-      <div className="admin-form-card">
-        <div className="admin-image-section-grid">
-          <ImagePicker label="Home > Imagem da Hero" value={content.homeHeroImage} category="Hero" onChange={(image) => update('homeHeroImage', image)} />
-          <ImagePicker label="Home > Imagem Hardox" value={content.homeHardoxImage} category="Hardox" onChange={(image) => update('homeHardoxImage', image)} />
-          <ImagePicker label="Home > Imagem Estrutura" value={content.homeStructureImage} category="Estrutura" onChange={(image) => update('homeStructureImage', image)} />
-          <ImagePicker label="Home > Galeria inicial" value={content.homeGalleryImages || []} category="Galeria" multiple onChange={(images) => update('homeGalleryImages', images)} />
-          <ImagePicker label="Sobre > Imagem principal" value={content.aboutMainImage} category="Sobre" onChange={(image) => update('aboutMainImage', image)} />
-          <ImagePicker label="Sobre > Equipe" value={content.aboutTeamImage} category="Equipe" onChange={(image) => update('aboutTeamImage', image)} />
-          <ImagePicker label="Sobre > Estrutura" value={content.aboutStructureImage} category="Estrutura" onChange={(image) => update('aboutStructureImage', image)} />
-          <ImagePicker label="Hardox > Imagem principal" value={content.hardoxMainImage} category="Hardox" onChange={(image) => update('hardoxMainImage', image)} />
-          <ImagePicker label="Hardox > Galeria" value={content.hardoxGalleryImages || []} category="Hardox" multiple onChange={(images) => update('hardoxGalleryImages', images)} />
-        </div>
-        <p className="admin-save-note">
-          <CheckCircle2 size={17} />
-          As imagens ficam vinculadas por página e seção, sem edição de código.
-        </p>
-      </div>
-    </section>
   );
 }
 
@@ -1339,7 +1339,7 @@ function SimpleRecordAdmin({ type }) {
     },
   }[type];
 
-  const [record, setRecord] = useStoredState(config.loader, config.saver);
+  const [record, setRecord, confirmRecord, recordMessage] = useStoredState(config.loader, config.saver);
 
   function update(field, value) {
     setRecord({ ...record, [field]: value });
@@ -1364,10 +1364,17 @@ function SimpleRecordAdmin({ type }) {
             </label>
           ))}
         </div>
-        <p className="admin-save-note">
-          <CheckCircle2 size={17} />
-          Alterações salvas automaticamente neste navegador.
-        </p>
+        <div className="admin-form-actions">
+          <button type="button" className="admin-primary" onClick={() => confirmRecord(`Alterações confirmadas com sucesso em ${config.label}.`)}>
+            Confirmar alterações
+          </button>
+        </div>
+        {recordMessage && (
+          <p className="admin-save-note">
+            <CheckCircle2 size={17} />
+            {recordMessage}
+          </p>
+        )}
       </div>
     </section>
   );

@@ -41,7 +41,7 @@ export function Hardox() {
           <div>
             <p className="text-xs font-black uppercase tracking-[0.28em] text-white/75">Hardox Wearparts</p>
             <h1 className="mt-5 max-w-4xl text-4xl font-black uppercase leading-tight text-white md:text-6xl">
-              Soluções antidesgaste para operações de mineração
+              {content.hardoxTitle || 'Soluções antidesgaste para operações de mineração'}
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-white/82">
               A TORNOGRAN participa do programa Hardox Wearparts, oferecendo soluções em aço antidesgaste para

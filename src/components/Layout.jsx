@@ -3,18 +3,27 @@ import { useEffect, useState } from 'react';
 import { Link, useLocation } from './Router.jsx';
 import { businessHours, contactAddress, contactEmail, contactPhones, instagramUrl, whatsappUrl } from '../data/site.js';
 import { trackQuoteClick, trackWhatsAppClick } from '../lib/analytics.js';
+import { useAdminContent, useAdminSettings } from '../lib/useAdminContent.js';
 
 const navItems = [
   { label: 'Home', path: '/' },
   { label: 'Sobre', path: '/sobre' },
   { label: 'Serviços', path: '/servicos' },
   { label: 'Hardox', path: '/hardox' },
+  { label: 'Cases', path: '/cases' },
   { label: 'Contato', path: '/contato' },
 ];
 
 export function Layout({ children }) {
   const [open, setOpen] = useState(false);
   const location = useLocation();
+  const content = useAdminContent();
+  const settings = useAdminSettings();
+  const phones = [settings.phone, settings.whatsapp].filter(Boolean).join(' / ') || contactPhones;
+  const email = settings.email || contactEmail;
+  const hours = settings.hours || businessHours;
+  const address = settings.address || contactAddress;
+  const instagram = settings.instagram || instagramUrl;
 
   useEffect(() => {
     setOpen(false);
@@ -38,10 +47,10 @@ export function Layout({ children }) {
               />
             </Link>
             <div className="grid min-w-0 flex-1 grid-cols-4 gap-3 pl-8">
-              <TopInfo icon={Phone} label="Ligue" value={contactPhones} />
-              <TopInfo icon={Mail} label="E-mail" value={contactEmail} />
+              <TopInfo icon={Phone} label="Ligue" value={phones} />
+              <TopInfo icon={Mail} label="E-mail" value={email} />
               <TopInfo icon={MapPin} label="Localização" value="Baixo Guandu - ES" />
-              <TopInfo icon={Clock} label="Atendimento" value="Seg a Quinta: 07 às 18h; Sexta: 07 às 16h" />
+              <TopInfo icon={Clock} label="Atendimento" value={hours} />
             </div>
           </div>
         </div>
@@ -72,7 +81,7 @@ export function Layout({ children }) {
           </nav>
 
           <div className="hidden items-center lg:flex">
-            <a className="instagram-button" href={instagramUrl} target="_blank" rel="noreferrer" aria-label="Instagram da TORNOGRAN">
+            <a className="instagram-button" href={instagram} target="_blank" rel="noreferrer" aria-label="Instagram da TORNOGRAN">
               <Instagram size={20} />
             </a>
             <Link className="primary-button" path="/contato" onClick={() => trackQuoteClick('header')}>
@@ -100,7 +109,7 @@ export function Layout({ children }) {
                 </Link>
               ))}
               <a
-                href={instagramUrl}
+                href={instagram}
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center gap-2 rounded-sm px-3 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-[#62747b]"
@@ -119,19 +128,19 @@ export function Layout({ children }) {
           <div>
             <p className="text-2xl font-black">TORNOGRAN LTDA</p>
             <p className="mt-3 max-w-xl text-sm leading-7 text-[#c6d0d4]">
-              Soluções em usinagem pesada, recuperação de componentes e manutenção industrial para operações que
-              exigem resistência, precisão e resposta técnica.
+              {content.footerText ||
+                'Soluções em usinagem pesada, recuperação de componentes e manutenção industrial para operações que exigem resistência, precisão e resposta técnica.'}
             </p>
           </div>
           <div>
             <p className="footer-title">Atendimento</p>
-            <p className="mt-3 text-sm text-[#c6d0d4]">{contactPhones}</p>
-            <p className="mt-2 text-sm text-[#c6d0d4]">{contactEmail}</p>
+            <p className="mt-3 text-sm text-[#c6d0d4]">{phones}</p>
+            <p className="mt-2 text-sm text-[#c6d0d4]">{email}</p>
           </div>
           <div>
             <p className="footer-title">Horário</p>
-            <p className="mt-3 text-sm text-[#c6d0d4]">{businessHours}</p>
-            <p className="mt-2 text-sm text-[#c6d0d4]">{contactAddress}</p>
+            <p className="mt-3 text-sm text-[#c6d0d4]">{hours}</p>
+            <p className="mt-2 text-sm text-[#c6d0d4]">{address}</p>
           </div>
         </div>
       </footer>

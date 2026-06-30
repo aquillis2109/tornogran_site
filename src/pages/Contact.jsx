@@ -16,12 +16,12 @@ import {
 } from '../data/site.js';
 import { trackQuoteFormSubmit, trackWhatsAppClick } from '../lib/analytics.js';
 import { addLeadFromQuote } from '../lib/adminStore.js';
+import { useAdminSettings } from '../lib/useAdminContent.js';
 
 const MAX_FILE_SIZE = 20 * 1024 * 1024;
 const ACCEPTED_EXTENSIONS = ['pdf', 'dwg', 'dxf', 'step', 'jpg', 'jpeg', 'png'];
 const ACCEPTED_FILE_TYPES = '.pdf,.dwg,.dxf,.step,.jpg,.jpeg,.png';
-const quoteFormEndpoint =
-  import.meta.env.VITE_QUOTE_FORM_ENDPOINT || `https://formsubmit.co/ajax/${contactEmail}`;
+const quoteFormEndpoint = import.meta.env.VITE_QUOTE_FORM_ENDPOINT;
 
 const services = [
   'Usinagem pesada',
@@ -82,11 +82,24 @@ function buildQuotePayload(form, file) {
 }
 
 export function Contact() {
+  const settings = useAdminSettings();
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
   const [submitError, setSubmitError] = useState('');
   const [fileName, setFileName] = useState('');
   const [fileError, setFileError] = useState('');
+  const phone = settings.phone || contactPhone;
+  const whatsapp = settings.whatsapp || contactWhatsapp;
+  const emails = settings.email || contactEmails;
+  const primaryEmail = (settings.email || contactEmail).split('/')[0].trim();
+  const address = settings.address || contactAddress;
+  const hours = settings.hours || businessHours;
+  const instagram = settings.instagram || instagramUrl;
+  const whatsappDigits = whatsapp.replace(/\D/g, '') || '27998834130';
+  const whatsappLink = `https://wa.me/55${whatsappDigits.replace(/^55/, '')}?text=${encodeURIComponent(
+    'Olá, gostaria de solicitar um orçamento com a TORNOGRAN LTDA.',
+  )}`;
+  const endpoint = quoteFormEndpoint || `https://formsubmit.co/ajax/${primaryEmail}`;
 
   function handleFileChange(event) {
     const file = event.currentTarget.files?.[0];
@@ -123,7 +136,7 @@ export function Contact() {
     setSending(true);
 
     try {
-      const response = await fetch(quoteFormEndpoint, {
+      const response = await fetch(endpoint, {
         method: 'POST',
         body: form,
         headers: {
@@ -225,13 +238,13 @@ export function Contact() {
             {sent && <p className="quote-success md:col-span-2">Solicitação enviada com sucesso.</p>}
             {submitError && <p className="quote-error md:col-span-2">{submitError}</p>}
             <p className="quote-integration-note md:col-span-2">
-              As solicitações são enviadas para contato@tornogran.com.br e ramon.moreira@tornogran.com.br.
+              As solicitações são enviadas para {emails}.
             </p>
           </form>
 
           <div className="contact-panel">
             <a
-              href={whatsappUrl}
+              href={whatsappLink || whatsappUrl}
               target="_blank"
               rel="noreferrer"
               className="contact-action"
@@ -240,31 +253,31 @@ export function Contact() {
               <MessageCircle size={24} />
               <span>
                 <strong>WhatsApp</strong>
-                {contactWhatsapp}
+                {whatsapp}
               </span>
             </a>
-            <a href={`tel:${contactPhone.replace(/\D/g, '')}`} className="contact-action">
+            <a href={`tel:${phone.replace(/\D/g, '')}`} className="contact-action">
               <Phone size={24} />
               <span>
                 <strong>Telefone</strong>
-                {contactPhones}
+                {[phone, whatsapp].filter(Boolean).join(' / ') || contactPhones}
               </span>
             </a>
-            <a href={`mailto:${contactEmail}`} className="contact-action">
+            <a href={`mailto:${primaryEmail}`} className="contact-action">
               <Mail size={24} />
               <span>
                 <strong>E-mail</strong>
-                {contactEmails}
+                {emails}
               </span>
             </a>
             <div className="contact-action">
               <MapPin size={24} />
               <span>
                 <strong>Localização</strong>
-                {contactAddress}
+                {address}
               </span>
             </div>
-            <a href={instagramUrl} target="_blank" rel="noreferrer" className="contact-action">
+            <a href={instagram} target="_blank" rel="noreferrer" className="contact-action">
               <Instagram size={24} />
               <span>
                 <strong>Instagram</strong>
@@ -273,7 +286,7 @@ export function Contact() {
             </a>
             <div className="mt-6 border-t border-white/10 pt-6">
               <p className="footer-title">Horário de atendimento</p>
-              <p className="mt-3 text-steel">{businessHours}</p>
+              <p className="mt-3 text-steel">{hours}</p>
             </div>
           </div>
         </div>
