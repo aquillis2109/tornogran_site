@@ -317,7 +317,7 @@ function Redirect({ to }) {
 }
 
 function AdminLogin({ mode = 'login' }) {
-  const [email, setEmail] = useState(adminUser.email);
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
@@ -372,7 +372,6 @@ function AdminLogin({ mode = 'login' }) {
         <Link path={isRecovery ? '/admin/login' : '/admin/recover'} className="admin-auth-link">
           {isRecovery ? 'Voltar para login' : 'Esqueci minha senha'}
         </Link>
-        <p className="admin-hint">Acesso inicial: {adminUser.email} / Tornogran@2026</p>
       </section>
     </main>
   );
