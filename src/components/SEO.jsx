@@ -51,6 +51,11 @@ export const seoConfig = {
     description:
       'Cases industriais da TORNOGRAN com recuperação, fabricação e soluções técnicas para mineração e máquinas pesadas.',
   },
+  '/faq': {
+    title: 'FAQ TORNOGRAN | Dúvidas sobre orçamento e serviços industriais',
+    description:
+      'Perguntas frequentes sobre orçamento, arquivos técnicos, atendimento, fabricação sob demanda e soluções industriais da TORNOGRAN.',
+  },
 };
 
 export const defaultSeo = {

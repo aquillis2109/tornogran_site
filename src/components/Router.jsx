@@ -2,13 +2,18 @@ import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
 const RouterContext = createContext({ path: '/', navigate: () => {} });
 
+function normalizePath(path) {
+  if (!path || path === '/') return '/';
+  return path.replace(/\/+$/, '') || '/';
+}
+
 function getPath() {
   if (window.location.protocol === 'file:') {
     const hashPath = window.location.hash.replace(/^#/, '').split('#')[0];
-    return hashPath.startsWith('/') ? hashPath : '/';
+    return hashPath.startsWith('/') ? normalizePath(hashPath) : '/';
   }
 
-  return window.location.pathname === '' ? '/' : window.location.pathname;
+  return normalizePath(window.location.pathname);
 }
 
 function scrollToHash(hash) {
@@ -47,7 +52,7 @@ export function RouterProvider({ children }) {
         } else {
           window.history.pushState({}, '', nextPath);
         }
-        setPath(url.pathname);
+        setPath(normalizePath(url.pathname));
         scrollToHash(url.hash);
       },
     }),

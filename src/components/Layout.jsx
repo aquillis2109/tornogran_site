@@ -11,6 +11,7 @@ const navItems = [
   { label: 'Serviços', path: '/servicos' },
   { label: 'Hardox', path: '/hardox' },
   { label: 'Cases', path: '/cases' },
+  { label: 'FAQ', path: '/faq' },
   { label: 'Contato', path: '/contato' },
 ];
 

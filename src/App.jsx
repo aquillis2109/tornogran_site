@@ -7,6 +7,7 @@ import { About } from './pages/About.jsx';
 import { AdminApp } from './pages/admin/AdminApp.jsx';
 import { Cases } from './pages/Cases.jsx';
 import { Contact } from './pages/Contact.jsx';
+import { Faq } from './pages/Faq.jsx';
 import { Hardox } from './pages/Hardox.jsx';
 import { Home } from './pages/Home.jsx';
 import { NotFound } from './pages/NotFound.jsx';
@@ -21,6 +22,7 @@ function Routes() {
     '/sobre': <About />,
     '/servicos': <Services />,
     '/hardox': <Hardox />,
+    '/faq': <Faq />,
     '/contato': <Contact />,
     '/cases': <Cases />,
   };
